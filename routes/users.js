@@ -56,5 +56,11 @@ router.post('/sign-in', async function(req, res, next) {
     }
 });
 
+/* LOGOUT */
+router.get('/logout', function(req, res, next) {
+    req.session.user = null;
+    res.redirect('/')
+});
+
 
 module.exports = router;
