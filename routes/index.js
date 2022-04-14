@@ -1,28 +1,76 @@
 var express = require('express');
 var router = express.Router();
 
-var journeyModel = require('../models/journeys');
+var journey = require('../models/journeys');
+var lasttrip = require('../models/lasttrip')
 
+var ticket = [];
 
+function upperFirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLocaleLowerCase();
+}
 
 /* GET LOGIN PAGE */
 router.get('/', function(req, res, next) {
     res.render('login');
 });
 
-
 /* GET HOMEPAGE */
-
-/* GET TRAJET */
-
-/* GET MY-TICKETS */
-
-/* GET RECENT-RESEARCH */
+router.get('/homepage', async function(req, res, next) {
+    if (req.session.user == null) {
+        res.redirect('/');
+    } else {
+        var lasttrip = await lasttrip.find();
+        res.render('homepage', { lasttrip })
+    }
+});
 
 /* GET ERRORS */
-router.get('/errors', function(req, res, next) {
+router.get('/notrain', function(req, res, next) {
     res.render('errors');
 });
+
+/* GET TICKET-FOUND */
+router.post('/ticketfound', async function(req, res, next) {
+    var users = await journey.find({ departure: upperFirst(req.body.departure), arrival: upperFirst(req.body.arrival), date: req.body.date });
+
+    var searchUser = await journey.findOne({ departure: upperFirst(req.body.departure), arrival: upperFirst(req.body.arrival) });
+
+    if (searchUser === null) {
+        res.render('errors')
+    }
+    res.render('trajets', { users: users })
+
+});
+
+/* GET CHECKOUT */
+router.get('/checkout', async function(res, req, next) {
+    var status = false;
+    var userSession = req.session.user;
+
+    for (var i = 0; i < ticket.length; i++) {
+        if (req.query.id == ticket[i].id) {
+            status = true;
+        }
+    }
+    if (status == false) {
+        ticket.push({
+            departure: req.query.departure,
+            arrival: req.query.arrival,
+            departureTime: req.query.departureTime,
+            date: req.query.date,
+            price: req.query.price,
+            id: req.query.id,
+            iduser: userSession.id
+        })
+    }
+    res.render('checkout', { ticket })
+})
+
+
+/* GET LAST TRIP */
+
+
 
 
 
@@ -79,11 +127,5 @@ router.get('/result', function(req, res, next) {
 
     res.render('index', { title: 'Express' });
 });
-
-
-
-
-
-
 
 module.exports = router;
