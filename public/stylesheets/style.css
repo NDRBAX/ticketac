@@ -19,7 +19,14 @@ body {
 	height: 40px;
 }
 
-.main-section {
+.main-section,
+.homepage-section {
 	height: 100vh;
 	margin-top: 90px;
+}
+
+img.landmark {
+	max-height: 350px;
+	width: auto;
+	margin-top: 100px;
 }
