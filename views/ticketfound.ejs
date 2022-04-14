@@ -18,22 +18,25 @@
 
                     <h2 class="text-white my-4">Tickets available on 02/08</h2>
                     <ul class="list-group">
-                        <!-- A faire a finir -->
-                        <% users.forEach(ticket=> {%>
+                        <% if(tickets!=undefined && tickets!=null&&tickets.length>0) {tickets.forEach(ticket=> {%>
                             <li class="list-group-item d-flex  justify-content-between align-items-center my-2 rounded">
                                 <span class="fw-bold">
                                     <%=ticket.departure%>/<%=ticket.arrival%>
                                 </span>
-                                <span>Train departure at : 15 pm</span>
-                                <div class="d-flex align-items-center"><span class="fw-bold fs-5  align-items-center me-4">93€</span><button class="btn btn-danger">OK</button></div>
+                                <span>Train departure at : <%=ticket.departureTime%></span>
+                                <div class="d-flex align-items-center"><span class="fw-bold fs-5  align-items-center me-4">
+                                        <%=ticket.price%> €
+                                    </span><a href="/checkout?departure=<%=ticket.departure%>&arrival=<%=ticket.arrival%>&depatureTime=<%=ticket.departureTime%>&price=<%=ticket.price%>&id=<%=ticket.id%>&date=<%=ticket.date%> " class="btn btn-danger">OK</a></div>
                             </li>
-                            <%}); %>
+                            <%})}else{%>
+                                <p>ya rien</p>
+                                <%} %>
 
-                                <li class="list-group-item d-flex  justify-content-between align-items-center my-2 rounded">
-                                    <span class="fw-bold">Paris/Lille</span>
-                                    <span>Train departure at : 15 pm</span>
-                                    <div class="d-flex align-items-center"><span class="fw-bold fs-5  align-items-center me-4">93€</span><button class="btn btn-danger">OK</button></div>
-                                </li>
+                                    <li class="list-group-item d-flex  justify-content-between align-items-center my-2 rounded">
+                                        <span class="fw-bold">Paris/Lille</span>
+                                        <span>Train departure at : 15 pm</span>
+                                        <div class="d-flex align-items-center"><span class="fw-bold fs-5  align-items-center me-4">93€</span><button class="btn btn-danger">OK</button></div>
+                                    </li>
                     </ul>
 
 

@@ -30,20 +30,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Paris/Lille</td>
-                                <td>02/80/19</td>
-                                <td>15:00pm</td>
-                                <td>93€</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Paris/Lille</td>
-                                <td>02/80/19</td>
-                                <td>15:00pm</td>
-                                <td>93€</td>
-                            </tr>
+                            <% let total=0; tickets.forEach((ticket,i)=>{
+                                total+=ticket.price;
+                                %>
+                                <tr>
+                                    <th scope="row">
+                                        <%=i+1%>
+                                    </th>
+                                    <td>
+                                        <%=ticket.departure%>/<%=ticket.arrival%>
+                                    </td>
+                                    <td>
+                                        <%=ticket.date%>
+                                    </td>
+                                    <td>
+                                        <%=ticket.departureTime%>
+                                    </td>
+                                    <td>
+                                        <%=ticket.price%> €
+                                    </td>
+                                </tr>
+                                <%})%>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Paris/Lille</td>
+                                        <td>02/80/19</td>
+                                        <td>15:00pm</td>
+                                        <td>93€</td>
+                                    </tr>
+
 
                         </tbody>
                         <tfoot style="background-color: rgb(253, 191, 191)">
@@ -52,7 +67,9 @@
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
-                                <th scope="col">333 €</th>
+                                <th scope="col">
+                                    <%=total%> €
+                                </th>
                             </tr>
                         </tfoot>
                     </table>
