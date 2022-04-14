@@ -17,11 +17,11 @@
                 <div class="row justify-content-center ">
                     <div class="col-9">
                         <h2 class="text-white my-4">One way ticket:</h2>
-                        <form action="" class="d-flex">
-                            <input class="form-control form-control-lg me-3" type="text" placeholder="From :Paris, Marseille..." name="">
-                            <input class="form-control form-control-lg mx-3" type="text" placeholder="To: Lille, Nantes.." name="">
-                            <input class="form-control form-control-lg mx-3" type="date" placeholder="To: Lille, Nantes.." name="">
-                            <button class="btn btn-danger ">Go</button>
+                        <form action="/ticketfound" method="post" class="d-flex">
+                            <input class="form-control form-control-lg me-3" type="text" placeholder="From :Paris, Marseille..." name="departure">
+                            <input class="form-control form-control-lg mx-3" type="text" placeholder="To: Lille, Nantes.." name="arrival">
+                            <input class="form-control form-control-lg mx-3" type="date" placeholder="To: Lille, Nantes.." name="date">
+                            <button class="btn btn-danger" type="submit">Go</button>
                         </form>
                     </div>
 
