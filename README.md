@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Ticketac" />
+  <img src="./assets/train.png" alt="Ticketac" height="200px"/>
 
   &#xa0;
 
@@ -39,6 +39,12 @@
 </p>
 
 <br>
+<p align="center">
+<img src="./assets/signup-preview.jpeg" alt="Ticketac" height="200px"/>
+<img src="./assets/homepage-preview.jpeg" alt="Ticketac" height="200px"/>
+<img src="./assets/results-preview.jpeg" alt="Ticketac" height="200px"/>
+<img src="./assets/my-tickjets-preview.jpeg" alt="Ticketac" height="200px"/>
+</p>
 
 ## :dart: About ##
 
@@ -79,8 +85,7 @@ $ npm start
 ```
 
 ## :memo: License ##
-
-
+Project logo : <a href="https://www.flaticon.com/free-icons/train" title="train icons">Train icons created by Smashicons - Flaticon</a>\
 Made with :heart: by <a href="https://github.com/NDRBAX" target="_blank">NDRBAX</a>
 
 &#xa0;
