@@ -9,7 +9,7 @@ var userModel = require('../models/users');
 
 /* SIGNUP */
 router.post('/sign-up', async function(req, res, next) {
-    let userRule = req.body.usernameFromFront;
+    let userRule = req.body.nameFromFront;
     let passwordRule = req.body.passwordFromFront;
 
     var searchUser = await userModel.findOne({
@@ -20,11 +20,12 @@ router.post('/sign-up', async function(req, res, next) {
         res.redirect('/');
     } else if (!searchUser) {
         var newUser = new userModel({
-            Name: req.body.nameFromFront,
-            FirstName: req.body.firstNameFromFront,
+            name: req.body.nameFromFront,
+            firstName: req.body.firstNameFromFront,
             email: req.body.emailFromFront,
             password: req.body.passwordFromFront,
         })
+
         var newUserSave = await newUser.save();
         req.session.user = {
             name: newUserSave.name,
@@ -56,21 +57,5 @@ router.post('/sign-in', async function(req, res, next) {
     }
 });
 
-/* SIGNIN */
-router.post('/sign-in', async function(req, res, next) {
-    var searchUser = await userModel.findOne({
-        email: req.body.emailFromFront,
-        password: req.body.passwordFromFront,
-    });
-    if (searchUser != null) {
-        req.session.user = {
-            name: searchUser.name,
-            id: searchUser._id,
-        };
-        res.redirect('/homepage');
-    } else {
-        res.render('login');
-    }
-});
 
 module.exports = router;
