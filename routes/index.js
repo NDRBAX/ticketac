@@ -75,6 +75,12 @@ router.get('/checkout', async function(res, req, next) {
 
 /* GET LAST TRIP */
 
+/* LOGOUT */
+router.get('/logout', function(req, res, next) {
+    req.session.user = null;
+    res.redirect('/')
+});
+
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
     // How many journeys we want
