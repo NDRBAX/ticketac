@@ -38,9 +38,9 @@ router.post('/sign-up', async function(req, res, next) {
 
 /* SIGNIN */
 router.post('/sign-in', async function(req, res, next) {
+
     var searchUser = await userModel.findOne({
-        email: req.body.emailFromFront,
-        password: req.body.passwordFromFront
+        email: req.body.emailFromFront
     })
     if (searchUser != null) {
         const validPassword = await bcrypt.compare(req.body.passwordFromFront, searchUser.password);

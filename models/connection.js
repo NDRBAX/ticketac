@@ -6,7 +6,7 @@ const projectName = 'ticketac';
 const uri = `mongodb+srv://${admin}:${pass}@ticketac.ntxad.mongodb.net/${projectName}?retryWrites=true&w=majority`;
 
 var options = {
-    connectTimeoutMS: 5000,
+    connectTimeoutMS: 50000,
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
