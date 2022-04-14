@@ -13,9 +13,9 @@ router.post('/sign-up', async function(req, res, next) {
     let passwordRule = req.body.passwordFromFront;
 
     var searchUser = await userModel.findOne({
-            email: req.body.emailFromFront
-        })
-        // Création du user s'il n'existe pas dans la BDD
+        email: req.body.emailFromFront
+    });
+    // Création du user s'il n'existe pas dans la BDD
     if (userRule.length == 0 || passwordRule.length == 0) {
         res.redirect('/');
     } else if (!searchUser) {
@@ -25,7 +25,6 @@ router.post('/sign-up', async function(req, res, next) {
             email: req.body.emailFromFront,
             password: req.body.passwordFromFront,
         })
-
         var newUserSave = await newUser.save();
         req.session.user = {
             name: newUserSave.name,
