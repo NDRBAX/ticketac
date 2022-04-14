@@ -3,9 +3,6 @@ var router = express.Router();
 
 var journeyModel = require('../models/journeys');
 
-var city = ["Paris", "Marseille", "Nantes", "Lyon", "Rennes", "Melun", "Bordeaux", "Lille"]
-var date = ["2018-11-20", "2018-11-21", "2018-11-22", "2018-11-23", "2018-11-24"]
-
 
 
 /* GET LOGIN PAGE */
@@ -17,7 +14,9 @@ router.get('/', function(req, res, next) {
 /* GET HOMEPAGE */
 
 /* GET TRAJET */
+
 /* GET MY-TICKETS */
+
 /* GET RECENT-RESEARCH */
 
 /* GET ERRORS */
