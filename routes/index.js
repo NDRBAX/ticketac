@@ -32,21 +32,15 @@ router.get('/notrain', function(req, res, next) {
 
 /* GET TICKET-FOUND */
 router.post('/ticketfound', async function(req, res, next) {
-    var users = await journey.find({
+    var tickets = await journey.find({
         departure: upperFirst(req.body.departure),
         arrival: upperFirst(req.body.arrival),
         date: req.body.date,
     });
-
-    var searchUser = await journey.findOne({
-        departure: upperFirst(req.body.departure),
-        arrival: upperFirst(req.body.arrival),
-    });
-
-    if (searchUser === null) {
+    if (tickets === null) {
         res.render('errors');
     }
-    res.render('ticketfound', { users: users });
+    res.render('ticketfound', { tickets: tickets });
 });
 
 /* GET CHECKOUT */
@@ -59,6 +53,7 @@ router.get('/checkout', async function(res, req, next) {
             status = true;
         }
     }
+
     if (status == false) {
         ticket.push({
             departure: req.query.departure,
@@ -73,13 +68,28 @@ router.get('/checkout', async function(res, req, next) {
     res.render('checkout', { ticket });
 });
 
-/* GET LAST TRIP */
-
-/* LOGOUT */
-router.get('/logout', function(req, res, next) {
-    req.session.user = null;
-    res.redirect('/')
+/* GET LAST-TRIP */
+router.get('/lasttrip', async function(req, res, next) {
+    for (var i = 0; i < ticket.length; i++) {
+        var saveLastTrip = new lasttrip({
+            departure: ticket[i].departure,
+            arrival: ticket[i].arrival,
+            date: ticket[i].date,
+            departureTime: ticket[i].departureTime,
+            price: ticket[i].price,
+            id: ticket[i].id,
+            iduser: ticket[i].iduser
+        })
+        await saveLastTrip.save();
+    };
+    var userSession = req.session.user;
+    lasttrips = await lasttrip.find({ iduser: userSession.id });
+    for (var i = 0; i < ticket.length; i++) {
+        ticket.pop()
+    }
+    res.render('lasttrip', { lasttrips });
 });
+
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
