@@ -25,6 +25,7 @@ router.get('/homepage', async function(req, res, next) {
     }
 });
 
+
 /* GET ERRORS */
 router.get('/notrain', function(req, res, next) {
     res.render('errors');
