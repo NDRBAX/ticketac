@@ -38,7 +38,6 @@ router.post('/sign-up', async function(req, res, next) {
 
 /* SIGNIN */
 router.post('/sign-in', async function(req, res, next) {
-
     var searchUser = await userModel.findOne({
         email: req.body.emailFromFront
     })
