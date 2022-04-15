@@ -85,6 +85,11 @@ router.get('/checkout', async function (req, res, next) {
 router.get('/add-lasttrip', async function (req, res, next) {
 	let user = await userModel.findById(req.session.user.id);
 	req.session.tickets.forEach(el => user.lasttrip.push(el));
+	req.session.tickets.forEach(el => {
+		user.lasttrip.find(items => el.id == items.id)
+			? user.lasttrip.push(el)
+			: null;
+	});
 	await user.save();
 	res.render('homepage');
 });
