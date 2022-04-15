@@ -40,10 +40,11 @@
                                     <%=i+1%>
                                 </th>
                                 <td>
-                                    <%=ticket.departure / ticket.arrival%>
+                                    <%=ticket.departure%> /
+                                        <%=ticket.arrival%>
                                 </td>
                                 <td>
-                                    <%=ticket.date.toLocaleDateString('fr-FR')%>
+                                    <%=ticket.date%>
                                 </td>
                                 <td>
                                     <%=ticket.departureTime%>

@@ -46,12 +46,6 @@ router.post('/ticketfound', async function(req, res, next) {
 
 /* GET CHECKOUT */
 router.get('/checkout', async function(res, req, next) {
-
-
-});
-
-/* GET LAST-TRIP */
-router.get('/lasttrip', async function(req, res, next) {
     var status = false;
     var userSession = req.session.user;
 
@@ -72,6 +66,31 @@ router.get('/lasttrip', async function(req, res, next) {
         });
     }
     res.render('checkout', { ticket });
+
+});
+
+/* GET LAST-TRIP */
+router.get('/lasttrip', async function(req, res, next) {
+    for (var i = 0; i < ticket.length; i++) {
+        var saveLastTrip = new lasttrip({
+            departure: ticket[i].departure,
+            arrival: ticket[i].arrival,
+            date: ticket[i].date,
+            departureTime: ticket[i].departureTime,
+            price: ticket[i].price,
+            id: ticket[i].id,
+            iduser: ticket[i].iduser
+        })
+        await saveLastTrip.save();
+    };
+
+    var userSession = req.session.user;
+
+    lasttrips = await lasttrip.find({ iduser: userSession.id });
+    for (var i = 0; i < ticket.length; i++) {
+        ticket.pop()
+    }
+    res.render('lasttrip', { lasttrips });
 });
 
 module.exports = router;
