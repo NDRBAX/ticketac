@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var journey = require('../models/journeys');
-var lasttrip = require('../models/lasttrip');
+
 var userModel = require('../models/users');
 
 var ticket = [];
@@ -54,7 +54,7 @@ router.get('/add-ticket', async function (req, res, next) {
 	} else {
 		req.session.tickets.push(ticket);
 	}
-	console.log(req.session.tickets);
+
 	res.render('checkout', { tickets: req.session.tickets });
 });
 
@@ -83,21 +83,14 @@ router.get('/checkout', async function (req, res, next) {
 
 /* ADD LASTTRIP */
 router.get('/add-lasttrip', async function (req, res, next) {
-	console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
-	console.log(req.session.user.id);
-	console.log(req.session.tickets);
 	let user = await userModel.findById(req.session.user.id);
-	console.log(user.lasttrip);
 	req.session.tickets.forEach(el => user.lasttrip.push(el));
-	console.log('session ticket******************');
 	await user.save();
-	console.log(user);
 	res.render('homepage');
 });
 
 /* GET LAST-TRIP */
 router.get('/lasttrip', async function (req, res, next) {
-	console.log(req.session.tickets);
 	let user = await userModel.findById(req.session.user.id);
 	let tickets = user.lasttrip;
 	res.render('lasttrip', { tickets });
