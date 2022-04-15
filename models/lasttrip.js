@@ -1,14 +1,13 @@
 var mongoose = require('mongoose');
 
 var citySchema = mongoose.Schema({
-    departure: String,
-    arrival: String,
-    date: String,
-    departureTime: String,
-    price: Number,
-    id: String,
-    iduser: String
-})
+	departure: String,
+	arrival: String,
+	date: String,
+	departureTime: String,
+	price: Number,
+	iduser: String,
+});
 
 var cityModel = mongoose.model('lasttrip', citySchema);
 

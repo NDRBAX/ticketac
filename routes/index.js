@@ -21,8 +21,7 @@ router.get('/homepage', async function (req, res, next) {
 	if (req.session.user == null) {
 		res.redirect('/');
 	} else {
-		var lasttrips = await lasttrip.find();
-		res.render('homepage', { lasttrips });
+		res.render('homepage');
 	}
 });
 
@@ -83,28 +82,23 @@ router.get('/checkout', async function (req, res, next) {
 	res.render('checkout', { ticket });
 });
 
+/* ADD LASTTRIP */
+router.get('/add-lasttrip', async function (req, res, next) {
+	console.log(req.session.tickets);
+	let user = await userModel.findById(req.session.user.id);
+
+	console.log(req.session.tickets);
+
+	console.log(user.lasttrip);
+	res.redirect('/homepage');
+});
+
 /* GET LAST-TRIP */
 router.get('/lasttrip', async function (req, res, next) {
-	for (var i = 0; i < ticket.length; i++) {
-		var saveLastTrip = new lasttrip({
-			departure: ticket[i].departure,
-			arrival: ticket[i].arrival,
-			date: ticket[i].date,
-			departureTime: ticket[i].departureTime,
-			price: ticket[i].price,
-			id: ticket[i].id,
-			iduser: ticket[i].iduser,
-		});
-		await saveLastTrip.save();
-	}
+	let user = await userModel.findById(req.session.user.id);
+	console.log(user);
 
-	var userSession = req.session.user;
-
-	let tickets = await lasttrip.find({ iduser: userSession.id });
-	for (var i = 0; i < ticket.length; i++) {
-		ticket.pop();
-	}
-	res.render('lasttrip', { tickets });
+	res.render('homepage');
 });
 
 module.exports = router;

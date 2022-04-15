@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
 	firstName: String,
 	email: String,
 	password: String,
+	lasttrip: { type: mongoose.Schema.Types.ObjectId, ref: 'journeys' },
 });
 
 userSchema.pre('save', function (next) {
