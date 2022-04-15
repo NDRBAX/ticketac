@@ -86,11 +86,11 @@ router.get('/lasttrip', async function (req, res, next) {
 
 	var userSession = req.session.user;
 
-	lasttrips = await lasttrip.find({ iduser: userSession.id });
+	let tickets = await lasttrip.find({ iduser: userSession.id });
 	for (var i = 0; i < ticket.length; i++) {
 		ticket.pop();
 	}
-	res.render('lasttrip', { lasttrips });
+	res.render('lasttrip', { tickets });
 });
 
 module.exports = router;
