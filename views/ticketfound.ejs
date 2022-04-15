@@ -28,8 +28,7 @@
                             <span>Train departure at : <%=ticket.departureTime%></span>
                             <div class="d-flex align-items-center"><span class="fw-bold fs-5  align-items-center me-4">
                                         <%=ticket.price%> €
-                                    </span><a href="/checkout?departure=<%=ticket.departure%>&arrival=<%=ticket.arrival%>&depatureTime=<%=ticket.departureTime%>&price=<%=ticket.price%>&id=<%=ticket.id%>&date=<%=ticket.date.toLocaleDateString('fr-FR')%> "
-                                    class="btn btn-danger">OK</a></div>
+                                    </span><a href="/add-ticket?ticketId=<%=ticket._id%> " class="btn btn-danger">OK</a></div>
                         </li>
                         <%})}else{%>
                             <p>ya rien</p>
