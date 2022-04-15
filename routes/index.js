@@ -90,7 +90,7 @@ router.get('/add-lasttrip', async function (req, res, next) {
 	console.log(user.lasttrip);
 	req.session.tickets.forEach(el => user.lasttrip.push(el));
 	console.log('session ticket******************');
-	console.log(user.lasttrip);
+	await user.save();
 	console.log(user);
 	res.render('homepage');
 });
@@ -98,7 +98,9 @@ router.get('/add-lasttrip', async function (req, res, next) {
 /* GET LAST-TRIP */
 router.get('/lasttrip', async function (req, res, next) {
 	console.log(req.session.tickets);
-	res.render('homepage');
+	let user = await userModel.findById(req.session.user.id);
+	let tickets = user.lasttrip;
+	res.render('lasttrip', { tickets });
 });
 
 module.exports = router;
