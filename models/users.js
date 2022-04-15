@@ -1,12 +1,21 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
+var tripSchema = new mongoose.Schema({
+	departure: String,
+	arrival: String,
+	date: Date,
+	departureTime: String,
+	price: Number,
+	id: String,
+});
+
 var userSchema = mongoose.Schema({
 	name: String,
 	firstName: String,
 	email: String,
 	password: String,
-	lasttrip: { type: mongoose.Schema.Types.ObjectId, ref: 'journeys' },
+	lasttrip: [tripSchema],
 });
 
 userSchema.pre('save', function (next) {

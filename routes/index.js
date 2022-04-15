@@ -54,14 +54,13 @@ router.get('/add-ticket', async function (req, res, next) {
 	} else {
 		req.session.tickets.push(ticket);
 	}
-
+	console.log(req.session.tickets);
 	res.render('checkout', { tickets: req.session.tickets });
 });
 
 /* GET CHECKOUT */
 router.get('/checkout', async function (req, res, next) {
 	var status = false;
-	var userSession = req.session.user;
 
 	for (var i = 0; i < ticket.length; i++) {
 		if (req.query.id == ticket[i].id) {
@@ -76,7 +75,7 @@ router.get('/checkout', async function (req, res, next) {
 			date: req.query.date,
 			price: req.query.price,
 			id: req.query.id,
-			iduser: userSession.id,
+			iduser: req.session.user.id,
 		});
 	}
 	res.render('checkout', { ticket });
@@ -84,20 +83,21 @@ router.get('/checkout', async function (req, res, next) {
 
 /* ADD LASTTRIP */
 router.get('/add-lasttrip', async function (req, res, next) {
+	console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+	console.log(req.session.user.id);
 	console.log(req.session.tickets);
 	let user = await userModel.findById(req.session.user.id);
-
-	console.log(req.session.tickets);
-
 	console.log(user.lasttrip);
-	res.redirect('/homepage');
+	req.session.tickets.forEach(el => user.lasttrip.push(el));
+	console.log('session ticket******************');
+	console.log(user.lasttrip);
+	console.log(user);
+	res.render('homepage');
 });
 
 /* GET LAST-TRIP */
 router.get('/lasttrip', async function (req, res, next) {
-	let user = await userModel.findById(req.session.user.id);
-	console.log(user);
-
+	console.log(req.session.tickets);
 	res.render('homepage');
 });
 
