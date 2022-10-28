@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="./assets/train.png" alt="Ticketac" height="200px"/>
+  <img src="./assets/train.png" alt="Ticketac" height="100px"/>
 
   &#xa0;
 
