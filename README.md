@@ -1,12 +1,12 @@
 <div align="center" id="top"> 
   <img src="./assets/train.png" alt="Ticketac" height="100px"/>
+  <h1>Ticketac</h1>
 
   &#xa0;
 
-  <!-- <a href="https://ticketac.netlify.app">Demo</a> -->
+
 </div>
 
-<h1 align="center">Ticketac</h1>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/NDRBAX/ticketac?color=56BEB8">
